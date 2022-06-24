@@ -1,0 +1,14 @@
+GET http://localhost:3000/employees
+
+###
+
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+    "firstName": "Ariana",
+    "lastName": "Winters",
+    "email": "arianaw15@gmail.com",
+    "employmentStatus": true,
+    "hourlyRate": 7.50
+}

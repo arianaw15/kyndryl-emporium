@@ -3,9 +3,11 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const mongoose = require('mongoose')
 const routes = require('./routes/apiRoutes')
+var cors = require('cors')
+app.use(cors())
 
 const db = mongoose.connection
 
@@ -17,11 +19,14 @@ app.use(express.json())
 app.use('/api', routes)
 
 
-app.use(express.static('build'));
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
 app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'build', 'index.html'));
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+
+mongoose.connect(process.env.DATABASE_URL || "mongodb://localhost/kyndryl-emporium");
 
 app.listen(port, () => console.log('Server started'));

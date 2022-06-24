@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 const Employee = require('../models/employee')
 
+mongoose.connect(process.env.DATABASE_URL || "mongodb://localhost/kyndryl-emporium");
+
 // Pulls all employees in data
-router.get('/', async (req, res) => {
+router.get('/employees', async (req, res) => {
     try {
         const employees = await Employee.find()
         res.json(employees)
@@ -13,11 +16,13 @@ router.get('/', async (req, res) => {
     })
 
 // Adds new employee to data
-router.post('/',async(req, res) => {
+router.post('/addemployee',async(req, res) => {
     const employee = new Employee({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
+        employmentStatus: req.body.employmentStatus,
+        hourlyRate: req.body.hourlyRate
         
     })
     try {

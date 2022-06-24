@@ -13,6 +13,14 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         required: true,
     }, 
+    employmentStatus: {
+        type: Boolean,
+        required: true,
+    },
+    hourlyRate: {
+        type: Number,
+        required: true
+    }
 
 })
 
