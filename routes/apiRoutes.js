@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const Employee = require('../models/employee')
+const Shift = require('../models/shift')
 
 mongoose.connect(process.env.DATABASE_URL || "mongodb://localhost/kyndryl-emporium");
 
@@ -18,8 +19,7 @@ router.get('/employees', async (req, res) => {
 // Adds new employee to data
 router.post('/addemployee',async(req, res) => {
     const employee = new Employee({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        fullName: req.body.fullName,
         email: req.body.email,
         employmentStatus: req.body.employmentStatus,
         hourlyRate: req.body.hourlyRate
@@ -30,6 +30,30 @@ router.post('/addemployee',async(req, res) => {
         res.status(201).json(newEmployee)
     } catch(err) {
         res.status(400).json({mesage: err.message})
+    }
+})
+
+router.get('/shifts', async (req,res) => {
+    try {
+        const shifts = await Shift.find()
+        res.json(shifts)
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+    })
+
+router.post('/addshift', async(req,res) => {
+    const shift = new Shift({
+        fullName: req.body.fullName,
+        date: req.body.date,
+        startTime: req.body.startTime, 
+        endTime: req.body.endTime,
+    })
+    try {
+        const newShift = await shift.save()
+        res.status(201).json(newShift)
+    } catch(err) {
+        res.status(400).json({message: err.message})
     }
 })
 

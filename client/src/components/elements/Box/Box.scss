@@ -1,3 +1,5 @@
-* {
-    
+.box {
+    &--is-error{
+        color: red;
+    }
 }
