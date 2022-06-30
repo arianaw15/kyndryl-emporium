@@ -16,6 +16,16 @@ router.get('/employees', async (req, res) => {
     }
     })
 
+// Pulls single employee data
+router.get('/employees/:_id', async (req,res) => {
+    try {
+        const employee = await Employee.find(req.params.id)
+        res.json(employee)
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+    })
+
 // Adds new employee to data
 router.post('/addemployee',async(req, res) => {
     const employee = new Employee({
@@ -33,6 +43,8 @@ router.post('/addemployee',async(req, res) => {
     }
 })
 
+// Gets all shifts in data
+
 router.get('/shifts', async (req,res) => {
     try {
         const shifts = await Shift.find()
@@ -41,6 +53,8 @@ router.get('/shifts', async (req,res) => {
         res.status(500).json({message: err.message})
     }
     })
+
+// Adds new shift to data
 
 router.post('/addshift', async(req,res) => {
     const shift = new Shift({

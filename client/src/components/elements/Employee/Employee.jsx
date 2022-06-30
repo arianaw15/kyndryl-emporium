@@ -4,20 +4,17 @@ import cx from 'classnames';
 
 import './Employee.scss'
 
-const Employee = ({className, email, employmentStatus, firstName, lastName, salary}) => {
+const Employee = ({className, email, employmentStatus, fullName, salary}) => {
 
 const classNames = cx('employee', className)
 
     return (
         <Box className={classNames}>
             <Box className='employee__is-employeeName'>
-                {firstName} {lastName}
-                <li>
-                    <ul>Email: {email}</ul>
-                    <ul>Employment Status: {employmentStatus}</ul>
-                    <ul>Salary: {salary}</ul>
-                
-                </li>
+                {fullName}
+                    <Box>Email: {email}</Box>
+                    <Box>Employment Status: {employmentStatus}</Box>
+                    <Box>Salary: {salary}</Box>
                
             </Box>
         </Box>

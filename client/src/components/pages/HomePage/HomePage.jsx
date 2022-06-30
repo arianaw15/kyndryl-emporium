@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {Box, Employee, ShiftCalendar} from '../../index'
 import axios from 'axios'
-import { Views } from 'react-big-calendar';
 
 const HomePage = () => {
     const [employees, setEmployees] = useState([]);

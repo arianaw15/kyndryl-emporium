@@ -4,7 +4,7 @@ import {Box, Select} from '../../index'
 const dayjs = require('dayjs')
 
 
-const ShiftPage = (value) => {
+const ShiftUpdatePage = (value) => {
 const [employeeList, setEmployeeList] = useState([])
 const [weekDay, setWeekDay] = useState([])
 const [time, setTime] = useState([])
@@ -48,6 +48,8 @@ useEffect(() => {
     }
 
  }
+
+ // Get time list
 
  function updateTime() {
     let newTimeArray = []
@@ -166,4 +168,4 @@ useEffect(() => {
     )
 }
 
-export {ShiftPage}
+export {ShiftUpdatePage}
