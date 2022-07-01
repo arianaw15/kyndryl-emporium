@@ -1,5 +1,12 @@
 .shiftupdatepage {
-    border: 1px solid black;
-        border-radius: 1rem;
-        padding: 0.5rem;
+    
+    &__form {
+        border: 1px solid white;
+        border-radius: 0.25rem;
+        background-color: #205EA5;
+        color:white;
+        margin: 1rem;
+        padding: 1rem;
+        width: 50%;
+    }
 }

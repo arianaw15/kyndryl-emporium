@@ -16,6 +16,7 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
     const [submitError, setSubmitError] = useState(false)
     const [hourlyRate, setHourlyRate] = useState(null)
 
+
     useEffect(() => {
         getEmployee()
      },[employeeToUpdate])
@@ -116,7 +117,7 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
                             />
                             <Button text="Update Employee's Information" />
                         </form>       
-                        {!submitError ? '' : <Box isError>Please ensure that all fields are filled out before submitting</Box>}          
+                        {!submitError ? '' : <Box isError>Please ensure that all fields are filled out before submitting</Box>}         
                     </Box>
                 )
         }

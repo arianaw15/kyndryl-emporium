@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Box, Employee, ShiftCalendar} from '../../index'
+import {Box, Header, ShiftCalendar} from '../../index'
 import axios from 'axios'
 
 const HomePage = () => {
@@ -17,7 +17,7 @@ const HomePage = () => {
 
     return (
         <Box>
-        <h1>Kyndryl Emporium Employee Database</h1>
+        <Header pageName={"Home - Upcoming Shifts"}/>
         <ShiftCalendar  />
         </Box>
     );

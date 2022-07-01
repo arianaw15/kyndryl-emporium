@@ -5,6 +5,8 @@ export {Employee} from './elements/Employee'
 export {ShiftCalendar} from './elements/ShiftCalendar'
 export {Select} from './elements/Select'
 export {Input} from './elements/Input'
+export {Header} from './elements/Header'
+export {NavLink} from './elements/NavLink'
 
 // Page Exports
 export {HomePage} from './pages/HomePage'

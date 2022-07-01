@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo, useEffect } from 'react'
 import axios from 'axios'
-import { Box } from '../Box'
+import { Box, Button } from '../Box'
 import cx from 'classnames'
 // import {Calendar, momentLocalizer, Views} from 'react-big-calendar'
 // import moment from 'moment'
@@ -28,19 +28,35 @@ const ShiftCalendar = ({className}) => {
    const regEx = new RegExp('/[A-Z]/g')
     return (
       <Box className={classNames}>
-      <Box>
-        {shifts && shifts.map((shift) => {
-          return (
-            <Box className='shiftcalendar__single-shift'>
-              {shift.fullName}
-              <Box>Date: {dayjs(shift.date).format('dddd MM/DD/YYYY')}</Box>
-              <Box>Start Time: {shift.startTime}</Box>
-              <Box>End Time: {shift.endTime}</Box>
-            </Box>
-          )
-        })}
-         
-      </Box>
+               <table className="employeespage__table">
+                <thead >
+                  <tr className='employeespage__table-head'>
+                    <th>Full Name</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Total Billable Hours</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {shifts && shifts.map((shift) => {
+            
+            return (
+                <tr className='employeespage__employee-box'>
+                    <td>{shift.fullName}</td>
+                    <td>{dayjs(shift.date).format('dddd MM/DD/YYYY')}</td>
+                    <td>{shift.startTime}</td>
+                    <td>{shift.endTime}</td>
+                    <td>Total Billable Hours($)</td>
+                        <br />
+                        
+                
+                </tr>
+            )            
+    })}
+                </tbody>
+              </table>
   </Box>
     )
 }

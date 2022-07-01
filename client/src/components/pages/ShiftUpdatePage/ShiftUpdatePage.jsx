@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import {Box, Select} from '../../index'
+import {Box, Select, Header} from '../../index'
 import cx from 'classnames'
 const dayjs = require('dayjs')
 
@@ -110,7 +110,8 @@ useEffect(() => {
 
     return (
         <Box className={classNames}>
-            <form onSubmit={validateSubmit}>
+            <Header pageName={"Shift Changes"}/>
+            <form className="shiftupdatepage__form" onSubmit={validateSubmit}>
                 <label>Employee</label>
                     <Select 
                     onChange={(event) => {

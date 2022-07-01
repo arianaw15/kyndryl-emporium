@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
 import './App.css';
-import {HomePage, ShiftUpdatePage, EmployeesPage, EmployeePage} from './components/index'
+import {HomePage, ShiftUpdatePage, EmployeesPage, NavLink} from './components/index'
 
 function App() {
   const [employees, setEmployees] = useState([]);
@@ -17,21 +17,27 @@ function App() {
     .catch(err => console.log(err))
 }
 
+const linkObject = [{
+  to: "/",
+  linkLabel: "Home"
+},
+{
+  to: "/shift-updates",
+  linkLabel: "Shift Changes"
+},
+{
+  to: "/employeeList",
+  linkLabel: "Employees"
+},
+]
+
   return (
       <Router>
         <div>
           <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-              <Link to="/shift-updates">Shift Updates</Link>
-              </li>
-              <li>
-              <Link to="/employeeList">Employees</Link>
-              </li>
-            </ul>
+              <NavLink to="/" linkLabel="Home" />
+              <NavLink to="/shift-updates" linkLabel="Shift Updates"/>
+              <NavLink to="/employeeList" linkLabel="Employee Table"/>
           </nav>
           <Routes>
         <Route path="/" element={<HomePage />}/>
