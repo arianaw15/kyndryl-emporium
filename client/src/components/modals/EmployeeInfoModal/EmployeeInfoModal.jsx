@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import {Box, Button, Input} from '../../index'
 import axios from 'axios'
 import cx from 'classnames'
+import { set } from 'mongoose'
 
 const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
     const classNames = cx('employeeModal', {
         'employeeModal--is-open' : isOpen
     }, className)
 
-    const [employee, setEmployee] = useState(null)
+    const [employeeId, setEmployeeId] = useState(null)
     const [fullName, setFullName] = useState(null)
     const [email, setEmail] = useState(null)
     const [employmentStatus, setEmploymentStatus] = useState(null)
@@ -19,14 +20,18 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
 
     useEffect(() => {
         getEmployee()
-     },[employeeToUpdate])
- 
+    }, [isOpen])
     
    const getEmployee = async () => {
-       const response = await axios.get(`/api/employees/${employeeToUpdate}`)
-       setEmployee(response.data)
+       const res = await axios.get(`/api/employees/employee/${employeeToUpdate}`)
+        setFullName(res.data.fullName)
+        setEmail(res.data.email)
+        setEmploymentStatus(() => {!res.data.employmentStatus ? 'Not Employed' : 'Employed'})
+        setHourlyRate(res.data.hourlyRate)
+        setEmployeeId(res.data._id)
      }
  
+     
 
     const validateSubmit = (e) => {
         e.preventDefault()
@@ -40,6 +45,7 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
     
     const onSubmit = () => {
         let submitData = {
+            _id: employeeId,
             fullName: fullName,
             email: email,
             employmentStatus: employmentStatus,
@@ -48,7 +54,7 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
         setSubmitError(false)
         setEmployeeData(submitData)
 
-        axios.patch(`/api/employees/:${employeeToUpdate}`, {
+        axios.patch(`/api/employees/${employeeId}`, {
             fullName: `${fullName}`,
             email: `${email}`,
             employmentStatus: employmentStatus === 'Employed' ? true : false,

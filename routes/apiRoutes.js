@@ -17,7 +17,7 @@ router.get('/employees', async (req, res) => {
     })
 
 // Pulls single employee data
-router.get('/employees/:_id', async (req,res) => {
+router.get('/employees/employee/:_id', async (req,res) => {
     try {
         const employee = await Employee.findById(req.params)
         res.json(employee)
@@ -48,7 +48,7 @@ router.post('/addemployee',async(req, res) => {
 // Updates employee data
 router.patch('/employees/:_id', async (req, res) => {
     try {
-        const employee = await Employee.findOneAndUpdate({'id': req.params.id})
+        const employee = await Employee.findByIdAndUpdate(req.params)
         if (req.body.fullName !== null) {
             employee.fullName = req.body.fullName
         }

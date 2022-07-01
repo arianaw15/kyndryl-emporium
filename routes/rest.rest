@@ -1,4 +1,4 @@
-GET http://localhost:8080/api/employees/62bea5195c2c6369aec609dc
+GET http://localhost:8080/api/employees/employee/62bf1c52f4f3bf039d3bdd7f
 
 ###
 
@@ -20,4 +20,17 @@ Content-Type: application/json
 
 {
     "fullName": "Ari Winters"
+}
+
+
+###
+
+POST http://localhost:8080/api/addshift
+Content-Type: application/json
+
+{
+    "fullName": "Ari Winters",
+    "email": "arianaw15@gmail.com",
+    "employmentStatus": "true",
+    "hourlyRate": "7.50"
 }
