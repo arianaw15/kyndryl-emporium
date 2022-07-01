@@ -1,0 +1,36 @@
+GET http://localhost:8080/api/employees/employee/62bf1c52f4f3bf039d3bdd7f
+
+###
+
+POST http://localhost:8080/api/addemployee
+Content-Type: application/json
+
+{
+    "fullName": "Ari Winters",
+    "email": "arianaw15@gmail.com",
+    "employmentStatus": "true",
+    "hourlyRate": "7.50"
+}
+
+
+###
+
+PATCH http://localhost:8080/api/employees/62bb5e20fb04f028823857f8
+Content-Type: application/json
+
+{
+    "fullName": "Ari Winters"
+}
+
+
+###
+
+POST http://localhost:8080/api/addshift
+Content-Type: application/json
+
+{
+    "fullName": "Ari Winters",
+    "email": "arianaw15@gmail.com",
+    "employmentStatus": "true",
+    "hourlyRate": "7.50"
+}
