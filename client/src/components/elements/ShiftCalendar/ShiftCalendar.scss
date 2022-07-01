@@ -1,1 +1,7 @@
-@import 'react-big-calendar/lib/sass/styles';
+.shiftcalendar {
+    &__single-shift {
+        border: 1px solid black;
+        border-radius: 1rem;
+        padding: 2rem;
+    }
+}

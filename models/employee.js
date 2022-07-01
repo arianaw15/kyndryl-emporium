@@ -16,7 +16,7 @@ const employeeSchema = new mongoose.Schema({
     hourlyRate: {
         type: Number,
         required: true
-    }
+    },
 
 })
 

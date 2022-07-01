@@ -19,12 +19,6 @@ const HomePage = () => {
         <Box>
         <h1>Kyndryl Emporium Employee Database</h1>
         <ShiftCalendar  />
-        {employees.map((employee) => {
-            return (
-                <Employee email={employee.email} employmentStatus={employee.employmentStatus} firstName={employee.firstName} lastName={employee.lastName} key={employee.id} salary={employee.hourlyRate}/>
-
-            )
-        })}
         </Box>
     );
 }

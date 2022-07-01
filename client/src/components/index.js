@@ -10,5 +10,8 @@ export {Input} from './elements/Input'
 export {HomePage} from './pages/HomePage'
 export {ShiftUpdatePage} from './pages/ShiftUpdatePage'
 export {EmployeesPage} from './pages/EmployeesPage'
-// export {EmployeePage} from './pages/EmployeePage'
-export {EmployeeInfoModal} from './pages/EmployeePage/EmployeeInfoModal'
+
+
+// Modal Exports
+export {EmployeeInfoModal} from './modals/EmployeeInfoModal'
+export {NewEmployeeModal} from './modals/NewEmployeeModal'

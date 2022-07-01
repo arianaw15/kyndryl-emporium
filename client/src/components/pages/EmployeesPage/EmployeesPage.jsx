@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import {Box, Button, Employee, Input, EmployeeInfoModal} from '../../index'
+import {Box, Button, Employee, EmployeeInfoModal, NewEmployeeModal} from '../../index'
 import axios from 'axios'
+import cx from 'classnames'
 
-const EmployeesPage = () => {
+const EmployeesPage = ({className}) => {
+    const classNames = cx('employeespage', className)
+
     const [employees, setEmployees] = useState([]);
-    const [employeeModalOpen, setEmployeeModalOpen] = useState(false)
+    const [employeeInfoModalOpen, setEmployeeInfoModalOpen] = useState(false)
     const [employeeUpdate, setEmployeeUpdate] = useState(null)
-
-    const [employeeFullName, setFullName] = useState(null)
-    const [employeeEmail, setEmail] = useState(null)
-    const [employeeStatus, setEmployeeStatus] = useState(null)
+    const [newEmployeeModalOpen, setNewEmployeeModalOpen] = useState(false)
 
     useEffect(() => {
        getEmployees()
@@ -22,33 +22,28 @@ const EmployeesPage = () => {
         })
         .catch(err => console.log(err))
     }
-
-    const onSubmit = (e) => {
-        e.preventDefault()
-        axios.patch('/api/employees/:id')
-
-    }
-
     return (
         <Box>
         <h1>Kyndryl Emporium Employee Database</h1>
+        <Button text='Add new employee' onClick={() => setNewEmployeeModalOpen(true)}/>
+        <NewEmployeeModal isOpen={newEmployeeModalOpen}/>
         {employees.map((employee) => {
-            let employeeId = employee._id
+            
                 return (
-                    <Box>
-                    <Employee email={employee.email} employmentStatus={employee.employmentStatus} fullName={employee.fullName} key={employee.id} salary={employee.hourlyRate}/>
+                    <Box className='employeespage__employee-box'>
+                    <Employee email={employee.email} employmentStatus={employee.employmentStatus} fullName={employee.fullName} key={employee._id} hourlyRate={employee.hourlyRate}/>
                     <Button 
                         onClick={() => {
-                            setEmployeeModalOpen(true)
-                            setEmployeeUpdate(employeeId)
-                            console.log(employeeId)
+                            setEmployeeInfoModalOpen(true)
+                            setEmployeeUpdate(employee._id)
+                            
                         }}
                         text='Update Employee Information'
                         />
                     </Box>
                 )            
         })}
-         <EmployeeInfoModal employeeId={employeeUpdate} isOpen={employeeModalOpen}/>
+         <EmployeeInfoModal employeeToUpdate={employeeUpdate} isOpen={employeeInfoModalOpen} />
         </Box>
     );
 }

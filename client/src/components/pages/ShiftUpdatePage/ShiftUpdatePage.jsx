@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {Box, Select} from '../../index'
+import cx from 'classnames'
 const dayjs = require('dayjs')
 
 
 const ShiftUpdatePage = (value) => {
+    const classNames = cx('shiftupdatepage')
 const [employeeList, setEmployeeList] = useState([])
 const [weekDay, setWeekDay] = useState([])
 const [time, setTime] = useState([])
@@ -107,7 +109,7 @@ useEffect(() => {
  }
 
     return (
-        <Box>
+        <Box className={classNames}>
             <form onSubmit={validateSubmit}>
                 <label>Employee</label>
                     <Select 
