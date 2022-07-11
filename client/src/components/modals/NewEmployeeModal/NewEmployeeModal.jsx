@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {Box, Button, Input} from '../../index'
 import axios from 'axios'
 import cx from 'classnames'
@@ -47,7 +47,6 @@ const NewEmployeeModal = ({className, isOpen, onClick}) => {
            })
            .catch(err => console.log(err))
     }
-    // console.log(employeeData)
 
     if (!isOpen) {
         return null

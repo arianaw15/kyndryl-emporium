@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import {Box, Button, Input} from '../../index'
 import axios from 'axios'
 import cx from 'classnames'
-import { set } from 'mongoose'
 
 const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
     const classNames = cx('employeeModal', {
@@ -17,6 +16,7 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
     const [submitError, setSubmitError] = useState(false)
     const [hourlyRate, setHourlyRate] = useState(null)
 
+    console.log(employeeData)
 
     useEffect(() => {
         getEmployee()
@@ -24,9 +24,10 @@ const EmployeeInfoModal = ({className, employeeToUpdate, isOpen}) => {
     
    const getEmployee = async () => {
        const res = await axios.get(`/api/employees/employee/${employeeToUpdate}`)
+       let employment = !res.data.employmentStatus ? 'Not Employed' : 'Employed'
         setFullName(res.data.fullName)
         setEmail(res.data.email)
-        setEmploymentStatus(() => {!res.data.employmentStatus ? 'Not Employed' : 'Employed'})
+        setEmploymentStatus(employment)
         setHourlyRate(res.data.hourlyRate)
         setEmployeeId(res.data._id)
      }

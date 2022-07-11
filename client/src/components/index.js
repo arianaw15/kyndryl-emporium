@@ -1,7 +1,6 @@
 // Element Exports 
 export {Box} from './elements/Box'
 export {Button} from './elements/Button'
-export {Employee} from './elements/Employee'
 export {ShiftCalendar} from './elements/ShiftCalendar'
 export {Select} from './elements/Select'
 export {Input} from './elements/Input'

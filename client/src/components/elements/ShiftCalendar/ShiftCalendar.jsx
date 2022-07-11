@@ -1,17 +1,23 @@
-import React, { useCallback, useState, useMemo, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Box, Button } from '../Box'
+import { Box, Button } from '../../index'
 import cx from 'classnames'
-// import {Calendar, momentLocalizer, Views} from 'react-big-calendar'
-// import moment from 'moment'
+import jsPDF from "jspdf";
 const dayjs = require('dayjs')
-
-// const localizer = momentLocalizer(moment)
 
 
 const ShiftCalendar = ({className}) => {
   const classNames = cx('shiftcalendar', className)
     const [shifts, setShifts] = useState()
+
+    const print = async () => {
+      const today = new Date()
+      const pdf = new jsPDF("l", "pt", "a4");
+      const data = await document.querySelector("#pdf");
+      pdf.html(data).then(() => {
+        pdf.save(`Kyndryl-Shifts-${dayjs(today).format("MM/DD/YYYY")}.pdf`);
+      });
+    };
 
     useEffect(() => {
       getShifts()
@@ -25,10 +31,39 @@ const ShiftCalendar = ({className}) => {
        .catch(err => console.log(err))
    }
 
-   const regEx = new RegExp('/[A-Z]/g')
+   const isBefore = (today, shiftDate) => {
+    return today < shiftDate;
+   }
+
+   const regEx = /\s?([AaPp][Mm]?)$/
+
+   const getShiftTime = (startTime, endTime) => {
+    let [startingTime, startingModifier] = startTime.split(regEx)
+
+    if (startingModifier === 'PM') {
+      if (startingTime === '12' ){
+        startingTime = '00'
+      }
+        startingTime = parseInt(startingTime, 10) + 12
+    }
+
+    let [endingTime, endingModifier] = endTime.split(regEx)
+    if (endingModifier === 'PM') {
+      if (endingTime === '12' ){
+        endingTime = '00'
+      }
+        endingTime = parseInt(endingTime, 10) + 12
+    }
+
+    let shiftTime = (endingTime-startingTime)
+    console.log(shiftTime)
+    return shiftTime
+
+  }
+
     return (
-      <Box className={classNames}>
-               <table className="employeespage__table">
+      <Box className={classNames} >
+               <table className="employeespage__table" id="pdf">
                 <thead >
                   <tr className='employeespage__table-head'>
                     <th>Full Name</th>
@@ -41,22 +76,25 @@ const ShiftCalendar = ({className}) => {
                 </thead>
                 <tbody>
                 {shifts && shifts.map((shift) => {
-            
-            return (
+                  const today = new Date()
+                  const shiftDate = new Date(shift.date)
+                  const shiftTime = getShiftTime(shift.startTime, shift.endTime)
+                  if (isBefore(today, shiftDate)) {
+              return (
                 <tr className='employeespage__employee-box'>
                     <td>{shift.fullName}</td>
                     <td>{dayjs(shift.date).format('dddd MM/DD/YYYY')}</td>
                     <td>{shift.startTime}</td>
                     <td>{shift.endTime}</td>
-                    <td>Total Billable Hours($)</td>
-                        <br />
-                        
+                    <td>{shiftTime}</td>                       
                 
                 </tr>
-            )            
+            )
+          }            
     })}
                 </tbody>
               </table>
+              <Button text="Print Upcoming Shifts" onClick={print} />
   </Box>
     )
 }

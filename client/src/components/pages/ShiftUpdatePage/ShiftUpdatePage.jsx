@@ -56,7 +56,7 @@ useEffect(() => {
  function updateTime() {
     let newTimeArray = []
     timeArray.map((time) => {
-        let suffix = time >= 12 ? 'PM':'AM'
+        let suffix = time >= 12 ? ' PM':' AM'
         let newTime = ((time + 11) % 12 + 1) + suffix
         newTimeArray.push(newTime)
         setTime(newTimeArray)

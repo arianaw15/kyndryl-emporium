@@ -80,6 +80,7 @@ router.get('/shifts', async (req, res) => {
     }
     })
 
+
 // Adds new shift to data
 
 router.post('/addshift', async(req,res) => {
@@ -97,21 +98,6 @@ router.post('/addshift', async(req,res) => {
         res.status(400).json({message: err.message})
     }
 })
-
-// async function getEmployee(req,res,next) {
-//     let employee
-// try {
-//     employee = await Employee.findById(req.params.id)
-//     if (employee == null){
-//         return res.status(404).json({message: 'Cannot find an employee'})
-//     }
-
-// } catch(err) {
-//     res.status(400).json({message: err.message})
-// }
-// res.employee = employee
-// next()
-// }
 
 module.exports = router
 

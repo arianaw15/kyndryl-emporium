@@ -10,7 +10,7 @@ const Header = ({ pageName, className, isError }) => {
     return (
         <h1 className={classNames}>
             Kyndryl Emporium 
-            <h3>{pageName}</h3>
+            <div>{pageName}</div>
         </h1>
     )
 }

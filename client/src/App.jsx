@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import './App.css';
 import {HomePage, ShiftUpdatePage, EmployeesPage, NavLink} from './components/index'
 
@@ -16,20 +16,6 @@ function App() {
     .then((res) => setEmployees(res.data))
     .catch(err => console.log(err))
 }
-
-const linkObject = [{
-  to: "/",
-  linkLabel: "Home"
-},
-{
-  to: "/shift-updates",
-  linkLabel: "Shift Changes"
-},
-{
-  to: "/employeeList",
-  linkLabel: "Employees"
-},
-]
 
   return (
       <Router>
