@@ -45,24 +45,24 @@ const EmployeesPage = ({className}) => {
         .catch(err => console.log(err))
     }
 
-    const getShiftTime = (startTime, endTime) => {
+    // const getShiftTime = (startTime, endTime) => {
 
-        const [startingTime, startingModifier] = startTime.split(' ')
-        let shiftTime
+    //     const [startingTime, startingModifier] = startTime.split(' ')
+    //     let shiftTime
 
-        if (startingModifier === 'PM') {
-            startingTime = parseInt(hours, 10) + 12
-            return startingTime
-        }
-        const [endingTime, endingModifier] = endTime.split(' ')
-        if (endingModifier === 'PM') {
-            endingTime = parseInt(hours, 10) + 12
-        }
+    //     if (startingModifier === 'PM') {
+    //         startingTime = parseInt(hours, 10) + 12
+    //         return startingTime
+    //     }
+    //     const [endingTime, endingModifier] = endTime.split(' ')
+    //     if (endingModifier === 'PM') {
+    //         endingTime = parseInt(hours, 10) + 12
+    //     }
 
-    shiftTime = endingTime - startingTime
-    return shiftTime
+    // shiftTime = endingTime - startingTime
+    // return shiftTime
 
-    }
+    // }
 
     
     return (
@@ -89,7 +89,8 @@ const EmployeesPage = ({className}) => {
                     <td>{employee.email}</td>
                     <td>{employee.employmentStatus ? 'Currently Employed' : 'Not Currently Employed'}</td>
                     <td>{currency}</td>
-                    <td>{JSON.stringify(employeeShifts)}</td>
+                    <td>Total Billable Hours</td>
+                    <td>Shifts</td>
                     <td><Button text='Update Employee Information' onClick={() => {
                             setEmployeeInfoModalOpen(true)
                             setEmployeeUpdate(employee._id)
